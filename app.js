@@ -23,6 +23,9 @@ var productRank = { //<- object literal
   midEls: document.getElementById('img2'),
   rightEls: document.getElementById('img3'),
   imageEls: document.getElementById('images'),
+  resultsEl: document.getElementById('results'),
+  resultsButton: document.getElementById('showResults'),
+  resetButton: document.getElementById('reset'),
 
     // TODO: All the properties of the object! What do you think you need? Try to write one piece at a time and make sure it does what you want before writing a little more.
     // NOTE: A-C-P reminder... Make very intentional and iterative changes to your code, and then A-C-P.
@@ -56,10 +59,11 @@ var productRank = { //<- object literal
       //need path(scr) and name (id)
   },
 
-  tallyClicks: function(elementId) {
+  tallyClicks: function(elId) {
     for (var i in allProducts) {
-      if (object.hasOwnProperty(i)) {
-
+      if (allProducts[i].name === elId) {
+        allProducts[i].tally += 1;
+        this.tallyClicks += 1;
       }
     }
       // TODO: Hmm... what's going to happen here?
@@ -69,6 +73,18 @@ var productRank = { //<- object literal
   },
 
   displayResults: function() {
+    var ulEl = document.createElement('ul');
+    for(var i in allProducts){
+      var liElOne = document.createElement('li');
+      var str = allProducts[i].name + ' has ' + allProducts[i].tally + ' votes';
+      str = str.charset(0).toUpperCase()+ str.slice(1);
+      liElOne.textContent = (str);
+      ulEl.appendChild(liElOne);
+    }
+    var liElTwo = document.createElement('li');
+    liElTwo.textContent = 'Total Clicks: ' + productRank.totalClicks;
+    ulEl.appendChild(liElTwo);
+
       // TODO: Hmm... what's going to happen here?
   //create ul list
   //create for loop of allProducts
@@ -93,7 +109,7 @@ var productRank = { //<- object literal
   }
 };
 
-// productRank.imageEls.addEventListener('click', productRank.onClick);
+ productRank.imageEls.addEventListener('click', productRank.onClick);
  productRank.displayImages();
 
 
