@@ -3,12 +3,28 @@
   <head>
     <title>Voting On Images</title>
     <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.bundle.js'></script>
   </head>
   <body>
-    <header>
+    <header class="container"> <!--class same name as container-->
+      <h2>Rate The Images</h2>
     </header>
     <main>
-      <section id="myImage">
+      <section id="images" class="container">
+        <img id="img1" class="four columns">
+        <img id="img2" class="four columns">
+        <img id="img3" class="four colums">
+        <!-- three img tags with different id's same class-->
+      </section>
+      <section class="container">
+        <button type="button" name="button" id="showResults" hidden="hidden">View Results</button>
+        <button type="button" name="reset" id="reset" hidden="hidden">Reset</button>
+          <!--another sections with class container same as first section
+          create button for show results
+          and reset button
+          create another secttion with id results no class setting-->
+      </section>
+      <section id="results">
       </section>
     </main>
   </body>

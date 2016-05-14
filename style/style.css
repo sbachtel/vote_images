@@ -1,5 +1,7 @@
 body * {
   margin: 0 auto;
   padding: 0 auto;
-  height: 600px;
+}
+img {
+  height: 200px;
 }
