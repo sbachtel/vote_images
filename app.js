@@ -1,22 +1,22 @@
  var allProducts = [];
  var productNames = ['bag', 'banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water_can', 'wine_glass'];
 
-function Product(name, path) {//constructor
+function Product(name, path) {
   this.name = name;
   this.path = path;
   this.tally = 0;
-  allProducts.push(this);//push images to allProducts array
+  allProducts.push(this);
    }
 
-(function imageAlbum(){ //create an iffy
+(function imageAlbum(){
   for(var i = 0; i < productNames.length; i++){
     new Product(productNames[i], "images/" + productNames[i] + ".jpg");
   }
  })();
 
-var productRank = { //<- object literal
-  totalClicks: 0,//assign object to null except total clicks
-  leftObj: null, //obj left, right, mid: null
+var productRank = {
+  totalClicks: 0,
+  leftObj: null,
   midObj: null,
   rightObj: null,
   leftEls: document.getElementById('img1'),
@@ -51,25 +51,16 @@ var productRank = { //<- object literal
 
     productRank.rightEls.src = productRank.rightObj.path;
     productRank.rightEls.id = productRank.rightObj.name;
-      // TODO: Hmm... what's going to happen here?
-      //product rank object put all procduts and get random into the product
-      //make an if statement to make sure they are not the same images.
 
-      //start pluging in obj elem into html left, right, center elemnts
-      //need path(scr) and name (id)
   },
 
   tallyClicks: function(elId) {
     for (var i in allProducts) {
       if (allProducts[i].name === elId) {
         allProducts[i].tally += 1;
-        this.tallyClicks += 1;
+        this.totalClicks += 1;
       }
     }
-      // TODO: Hmm... what's going to happen here?
-
-      //when call tallyClicks you need and id of an elementId
-      //need for loop and will refrence productRank
   },
 
   displayResults: function() {
@@ -77,35 +68,37 @@ var productRank = { //<- object literal
     for(var i in allProducts){
       var liElOne = document.createElement('li');
       var str = allProducts[i].name + ' has ' + allProducts[i].tally + ' votes';
-      str = str.charset(0).toUpperCase()+ str.slice(1);
       liElOne.textContent = (str);
       ulEl.appendChild(liElOne);
     }
     var liElTwo = document.createElement('li');
     liElTwo.textContent = 'Total Clicks: ' + productRank.totalClicks;
     ulEl.appendChild(liElTwo);
-
-      // TODO: Hmm... what's going to happen here?
-  //create ul list
-  //create for loop of allProducts
-  //in the for loop create li element
-  // a var which will add allProducts array and .name to 'has' allProducts array .tally +'voteImages'
-  //then make new str with charset and slice
-  //appent the str to the li
+    this.resultsEl.appendChild(liElOne);
   },
 
   showButton: function() {
-      // TODO: Hmm... what's going to happen here?
+      this.resultsButton.hidden = false;
+      this.resultsButton.addEventListener('click', function(){
+        productRank.resultsButton.hidden = false;
+        productRank.resultsButton.hidden = true;
+        productRank.displayResults();
+        productRank.resetButton.addEventListener('click', function(){
+            productRank.resultsButton.hidden = true;
+            location.reload();
+        })
+      });
   },
 
   onClick: function() {
-      // TODO: Hmm... what's going to happen here?
-      //if statement evnt targ id of the productRank leftobj.name or rightobj or centerobj
-      //productRank tallyclikc event target and id
-      //antoher if statement inside the first if statement totalclicks %15 === 0
-      //remove eventlisterner(cick,productRank.onClick);
-      //products displayImages()
-      //else with about warning click an image
+    if (event.target.id === productRank.leftObj.name || event.target.id === productRank.midObj.name || event.target.id === productRank.rightObj.name)
+      productRank.tallyClicks[event.target.id];
+
+      if (productRank.totalClicks % 15 === 0){
+        productRank.imageEls.removeEventListener('click', productRank.onClick);
+        productRank.showButton();
+      }
+      productRank.displayImages();
   }
 };
 
