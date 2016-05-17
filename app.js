@@ -36,29 +36,31 @@ var productRank = {
   },
 
   displayImages: function() {
-    productRank.leftObj = allProducts[productRank.getRandomIndex()];
-    productRank.midObj = allProducts[productRank.getRandomIndex()];
-    productRank.rightObj = allProducts[productRank.getRandomIndex()];
+    this.leftObj = allProducts[this.getRandomIndex()];
+    this.midObj = allProducts[this.getRandomIndex()];
+    this.rightObj = allProducts[this.getRandomIndex()];
 
-      if(productRank.leftObj === productRank.midObj || productRank.leftObj === productRank.rightObj || productRank.rightObj === productRank.midObj){
-      productRank.displayImages();
+      if(this.leftObj === this.midObj || this.leftObj === this.rightObj || this.rightObj === this.midObj){
+      this.displayImages();
     }
-    productRank.leftEls.src = productRank.leftObj.path;
-    productRank.leftEls.id = productRank.leftObj.name;
+    this.leftEls.src = this.leftObj.path;
+    this.leftEls.id = this.leftObj.name;
 
-    productRank.midEls.src = productRank.midObj.path;
-    productRank.midEls.id = productRank.midObj.name;
+    this.midEls.src = this.midObj.path;
+    this.midEls.id = this.midObj.name;
 
-    productRank.rightEls.src = productRank.rightObj.path;
-    productRank.rightEls.id = productRank.rightObj.name;
+    this.rightEls.src = this.rightObj.path;
+    this.rightEls.id = this.rightObj.name;
 
   },
 
   tallyClicks: function(elId) {
     for (var i in allProducts) {
-      if (allProducts[i].name === elId) {
+      if (elId === allProducts[name].name) {
         allProducts[i].tally += 1;
         this.totalClicks += 1;
+        console.log(allProducts[name].name + ' has' + allProducts[name].tally + ' clicks');
+        console.log('Total click so far is ' + productRank.totalClicks);
       }
     }
   },
