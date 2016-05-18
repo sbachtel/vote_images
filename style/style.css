@@ -1,9 +1,26 @@
 
 body * {
-  margin: 0 auto;
-  padding: 0 auto;
-  background-color: blue;
+  margin: 0px auto;
+  padding: 0px auto;
+  max-width: 960px;
+
+}
+
+.container {
+  display: flex;
+}
+header{
+
+}
+main {
+  padding: 40px;
+  background-color: #83A2AA;
+}
+#four_columns{
+  flex-grow: 1;
 }
 img {
-  height: 200px;
+  max-height: 270px;
+  padding-left: .300em;
+  padding-right: .300em;
 }

@@ -27,12 +27,8 @@ var productRank = {
   resultsButton: document.getElementById('showResults'),
   resetButton: document.getElementById('reset'),
 
-    // TODO: All the properties of the object! What do you think you need? Try to write one piece at a time and make sure it does what you want before writing a little more.
-    // NOTE: A-C-P reminder... Make very intentional and iterative changes to your code, and then A-C-P.
-
   getRandomIndex: function() {
     return Math.floor(Math.random() * productNames.length);
-       // TODO: Hmm... what's going to happen here?
   },
 
   displayImages: function() {
@@ -43,6 +39,7 @@ var productRank = {
       if(this.leftObj === this.midObj || this.leftObj === this.rightObj || this.rightObj === this.midObj){
       this.displayImages();
     }
+
     this.leftEls.src = this.leftObj.path;
     this.leftEls.id = this.leftObj.name;
 
@@ -56,10 +53,10 @@ var productRank = {
 
   tallyClicks: function(elId) {
     for (var i in allProducts) {
-      if (elId === allProducts[name].name) {
+      if (allProducts[i].name === elId) {
         allProducts[i].tally += 1;
         this.totalClicks += 1;
-        console.log(allProducts[name].name + ' has' + allProducts[name].tally + ' clicks');
+        console.log(allProducts[i].name + ' has' + allProducts[i].tally + ' clicks');
         console.log('Total click so far is ' + productRank.totalClicks);
       }
     }
@@ -72,11 +69,11 @@ var productRank = {
       var str = allProducts[i].name + ' has ' + allProducts[i].tally + ' votes';
       liElOne.textContent = (str);
       ulEl.appendChild(liElOne);
+
     }
-    var liElTwo = document.createElement('li');
-    liElTwo.textContent = 'Total Clicks: ' + productRank.totalClicks;
-    ulEl.appendChild(liElTwo);
-    this.resultsEl.appendChild(liElOne);
+
+    liElOne.textContent = 'Total Clicks: ' + productRank.totalClicks;
+    this.resultsEl.appendChild(ulEl);
   },
 
   showButton: function() {
@@ -94,7 +91,7 @@ var productRank = {
 
   onClick: function() {
     if (event.target.id === productRank.leftObj.name || event.target.id === productRank.midObj.name || event.target.id === productRank.rightObj.name)
-      productRank.tallyClicks[event.target.id];
+      productRank.tallyClicks(event.target.id);
 
       if (productRank.totalClicks % 15 === 0){
         productRank.imageEls.removeEventListener('click', productRank.onClick);
